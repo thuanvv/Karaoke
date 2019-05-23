@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Karaoke</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="public/bootstrap.min.css">
+      <script src="public/jquery.min.js"></script>
+      <script src="public/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="css.css">
+      <link rel="shortcut icon" href="public/images/Babasse-Old-School-Micro.ico" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row content">
+        <div class="col-sm-3 sidenav sidenavLeft">
+          <h4>Karaoke</h4>
+          <ul class="nav nav-pills nav-stacked">
+            <li>
+              <audio id="audioSong" controls>
+                <source src="" id="srcSong" />
+              </audio>
+            </li>
+            <li id="activeStartPause">
+              <span onclick="playSong();" class="activeAction">Start</span>
+            </li>
+            <li id="activeStop">
+              <span onclick="stopSong();" class="activeAction">Stop</span>
+            </li>
+            <li id="activeRepeat">
+              <span onclick="repeatSongOn();" class="activeAction">Repeat</span>
+            </li>
+            <li>
+              <span onclick="getCurrentTime();" class="activeAction">
+                Current Timing: <span id="showCurrentTimeSong"></span>
+              </span>
+            </li>
+            <hr>
+            <!-- <li>
+              <span id="demoKaraoke" class="activeAction" onclick="demoKaraoke();">DEMO</span>
+            </li> -->
+            <li>
+              <span data-toggle="modal" data-target="#showReadMe" class="activeAction">READ ME</span>
+            </li>
+          </ul>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+        
+        <div class="col-sm-9 sidenavRight">
+          <div class="card-body">
+            <div class="table-responsive inputMedia">
+              <h4>Import File "mp3" and file "lrc"</h4>
+              <hr>
+              <div class="form-group"> 
+                <label for="songImport">Name(.mp3)<span class="setCorlorRed">*</span> :</label>
+                <input type="file" class="form-control" rows="5" name="songImport" required id="fileSong">
+              </div>
+              <div class="form-group">
+                <label for="lyricImport">Lyric(.lrc)<span class="setCorlorRed">*</span> :</label>
+                <input type="file" class="form-control" rows="5" name="lyricImport" required id="fileLyric">
+              </div>
+            </div>
+          </div>
+          <div class="showLyricToKaraoke" id="inputTextToSave"></div>
+          <script src="js.js"></script>
+          <script src="demo.js"></script>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="showReadMe" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">READ ME</h4>
+          </div>
+          <div class="modal-body">
+            <p>Để sử dụng, cần phải chuẩn bị 1 file <span class="setCorlorRed">.mp3</span></p>
+            <p>Và file lời bài hát <span class="setCorlorRed">.lrc</span> hoặc file text có format như ví dụ sau:</p>
+            <p>
+              <img src="public/images/formatLyric.png" alt="">
+            </p>
+            <p><span class="setCorlorRed">Note:</span></p>
+            <p>
+              Có thể lấy file <span class="setCorlorRed">.lrc </span>tại  <span class="setCorlorRed">nhaccuatui.com</span> bằng cách:
+            </p>
+            <p>CHÚ Ý LÀ PHẢI DOWNLOAD FILE <span class="setCorlorRed">.MP3</span> CÙNG VỚI FILE <span class="setCorlorRed">.LRC</span> ĐỂ  HIỆN THỊ LỜI BÀI HÁT CHUẨN XÁC HƠN!!!</p>
+            <p><span class="setFrontBold">Bước 1:</span> Truy cập website nhaccuatui.com và tìm bài hát có lời karaoke:</p>
+            <p>Chọn <span class="setFrontBold">View page source</span> hoặc ấn <span class="setFrontBold">Ctrl + U</span></p>
+            <p>
+              <img width="500px" src="public/images/step1.png" alt="">
+            </p>
+            <p><span class="setFrontBold">Bước 2:</span> Thực hiện B1 sẽ dẫn đến trang page source, ấn Ctrl + F nhập xml và tìm đến đoạn như sau:</p>
+            <p><img width="570px" src="public/images/step2.png" alt=""></p>
+            <p><span class="setFrontBold">Bước 3:</span>
+              Truy cập vài đường link đc tô đậm như ở B2, sẽ có được 1 trang chỉ có 1 đoạn text,
+              tiếp tục bấm <span class="setFrontBold">Ctrl + U</span> tương tự ở B1, tiếp tục truy cập đường 
+              link được tô đậm như hình dưới để tải file <span class="setCorlorRed">.lrc</span> về.</p></p>
+            <p><img width="550px" src="public/images/step3.png" alt=""></p>
+            <p>Mở file vừa tải về, sẽ thấy 1 chuỗi string như sau:</p>
+            <p><code>BF24AA05A1C1BB9E3EBAD70300EE6DE8636D14D80CBB117.....</code></p>
+            <p><span class="setFrontBold">Bước 4:</span> Truy cập <span class="setFrontBold">https://www.tools4noobs.com/online_tools/decrypt</span>, 
+              nhập Key: <span class="setCorlorRed">Lyr1cjust4nct</span> và paste chuỗi vừa tải về như ở B3 vào 
+              vùng content, sau đó setup như hình dưới đây:</p>
+            <p><img width="550px" src="public/images/step4.png" alt=""></p>
+            <p>Sau khi setup xong, ấn <span class="setFrontBold">Decrypt this!</span> thì sẽ có result đúng định dạng như hình trên. 
+              Copy đoạn result đó paste lại vào file để import.</p>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div> 
+      </div>
+    </div>
+    <footer>
+      <p>Copyright@Phạm Đức</p>
+    </footer>
+  </body>
+</html>
